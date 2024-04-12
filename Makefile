@@ -43,10 +43,6 @@ default: all
 #
 all: model1 model2
 #
-# Compile and link libaries
-oasis3_psmile:
-	(cd $(O3DIR)/util/make_dir ; $(MAKE) oasis3_psmile -f TopMakefileOasis3)
-#
 #-------------------------------------------------------------------------------
 # Rules for executables
 #-------------------------------------------------------------------------------
