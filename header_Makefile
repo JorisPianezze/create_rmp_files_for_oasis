@@ -1,4 +1,3 @@
-O3DIR = $(OASISDIR)/..
-include $(O3DIR)/util/make_dir/make.inc
+include $(OASIS_INC_DIR)/make.inc
 INC_DIR = -I$(ARCHDIR)/include -I$(ARCHDIR)/build/lib/psmile.MPI1 -I$(ARCHDIR)/build/lib/scrip
 F90FLAGS = $(FCBASEFLAGS) $(INC_DIR) $(CPPDEF) -I$(NETCDF_INCLUDE)

@@ -1,4 +1,19 @@
 #
+ifndef OASIS_INC_DIR
+$(error Please set OASIS_INC_DIR environment variable)
+endif
+$(echo You chose to compile with ${OASIS_INC_DIR})
+#
+ifndef NETCDF_CONFIG
+$(error Please set NETCDF_CONFIG environment variable)
+endif
+#
+$(info ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~)
+$(info You will compile with :                      )
+$(info - OASIS version  : ${OASIS_INC_DIR}          )
+$(info - NETCDF version : ${NETCDF_CONFIG}          )
+$(info ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~)
+#
 include header_Makefile
 LIBPSMILE = $(ARCHDIR)/lib/libpsmile.${CHAN}.a $(ARCHDIR)/lib/libmct.a $(ARCHDIR)/lib/libmpeu.a $(ARCHDIR)/lib/libscrip.a
 #
@@ -82,9 +97,3 @@ clean:
 	-rm -f *.o *.mod *.MOD model1 model2
 	-rm -f i.*.F90 *.L
 	-rm -f core core.* 
-#
-# Make sure to recompile everything
-#
-realclean: clean remove
-remove:
-	(cd $(O3DIR)/util/make_dir ; $(MAKE) realclean -f TopMakefileOasis3)

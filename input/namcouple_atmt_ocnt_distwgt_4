@@ -19,7 +19,7 @@
 ############################################
  $STRINGS
 FSENDANA FRECVANA 1 7200 1 rst.nc EXPOUT
-40 40 38 38 atmt ocnt
+40 40 40 40 atmt ocnt
 R  0  R  0
 SCRIPR
 DISTWGT LR SCALAR LATLON 1 4

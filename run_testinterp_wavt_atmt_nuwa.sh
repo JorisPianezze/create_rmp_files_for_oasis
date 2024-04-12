@@ -110,16 +110,16 @@ echo "SRC_GRID_OVERLAP : $SRC_GRID_OVERLAP"
 
 ## - Create name_grids.dat from namcouple informations
 cat <<EOF >> $rundir/name_grids.dat
-&grid_source_characteristics
+\$grid_source_characteristics
 cl_grd_src='$SRC_GRID'
 cl_remap='$remap'
 cl_type_src='$SRC_GRID_TYPE'
 cl_period_src='$SRC_GRID_PERIOD'
 il_overlap_src=$SRC_GRID_OVERLAP
-/
-&grid_target_characteristics
+\$end
+\$grid_target_characteristics
 cl_grd_tgt='$TGT_GRID'
-/
+\$end
 EOF
 
 cd $rundir
@@ -129,41 +129,36 @@ cd $rundir
 
 cat <<EOF > $rundir/run_$casename
 #!/bin/bash
-#######################################################
-#SBATCH --job-name    "rmp_wavt_to_atmt"
-#SBATCH --account     "gda2203"
-#SBATCH --constraint  "MI250"
-#SBATCH --output      "output_rmp_wavt_to_atmt-%j"
-#SBATCH --time         1-00:00:00
-#SBATCH --nodes        2
-#SBATCH --ntasks       64
-#SBATCH --exclusive
-#######################################################
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#SBATCH --job-name    "rmp_atmt_to_wavt"
+#SBATCH --output      "output_rmp_atmt_to_wavt-%j"
+#SBATCH --time         0-00:10:00
+#SBATCH --nodes        1
+#SBATCH --ntasks       2
+#SBATCH -p gpus
+#SBATCH -w n370
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+source /home/piaj/models_gpu/GIT-MNH-55X-dev-OPENACC/conf/profile_mesonh-LXnvhpc2202-R8I4-MNH-V5-5-1-OASISBASHRC-MPIAUTO-OPENACCO2
+. /home/piaj/env/env_cpl_mnh551_oa5_gpu.sh
+
+export PGI_ACC_SYNCHRONOUS=1
+
+NP=${NP:-1}
+NPS=${NPS:-1}
+#NP=${NP:-4}
+#NPS=${NPS:-2}
+#NP=${NP:-16}
+#NPS=${NPS:-8}
+
+export ACC_DEVICE_TYPE=HOST ### utilise CPU seulement !!!
+#export MPIRUN=${MPIRUN:-"Mpirun -tag-output  -map-by ppr:${NPS}:socket -bind-to none -x PGI_ACC_POOL_ALLOC -x PGI_ACC_SYNCHRONOUS -np ${NP} set_core_device_impair "}
+export MPIRUN=${MPIRUN:-"Mpirun -tag-output  -map-by ppr:${NPS}:socket -bind-to none -x PGI_ACC_SYNCHRONOUS -np ${NP}"}
+#export MPIRUN=${MPIRUN:-"Mpirun -x PGI_ACC_SYNCHRONOUS -np ${NP}"}
 
 ulimit -s unlimited
-ulimit -c 0
 
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-#   Load environnement variables
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-source $HOME/env/env_cpl_mnh551_oa5_ww3.sh
-
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-#   Define prog.conf file
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-cat /dev/null > prog.conf
-
-echo "0-31 ./$exe1" >> prog.conf
-echo "32-63 ./$exe2" >> prog.conf
-
-########################################################
-# ~~~~
-#
-srun --multi-prog prog.conf
-#
-# ~~~~
-########################################################
+time mpirun -np ${nproc_exe1} ./$exe1 : -np ${nproc_exe2} ./$exe2
 EOF
 
 ######################################################################

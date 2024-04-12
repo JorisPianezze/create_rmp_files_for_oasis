@@ -40,7 +40,7 @@ fi
 ## - User's section
 ##
 SRC_GRID=atmt
-TGT_GRID=wavt
+TGT_GRID=ocnt
 remap=distwgt_4
 rundir=$srcdir/${casename}_${SRC_GRID}_${TGT_GRID}_${remap}/rundir_${nnode}_${mpiprocs}_${threads}
 ##
@@ -130,10 +130,10 @@ cd $rundir
 cat <<EOF > $rundir/run_$casename
 #!/bin/bash
 #######################################################
-#SBATCH --job-name    "rmp_atmt_to_wavt"
-#SBATCH --account     "gda2203"
+#SBATCH --job-name    "rmp_atmt_to_ocnt"
+#SBATCH --account     "lat0569"
 #SBATCH --constraint  "MI250"
-#SBATCH --output      "output_rmp_atmt_to_wavt-%j"
+#SBATCH --output      "output_rmp_atmt_to_ocnt-%j"
 #SBATCH --time         1-00:00:00
 #SBATCH --nodes        2
 #SBATCH --ntasks       64
@@ -146,7 +146,7 @@ ulimit -c 0
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #   Load environnement variables
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-source $HOME/env/env_cpl_mnh551_oa5_ww3.sh
+source /lus/work/CT1/lat0569/jpianezze/models_IANOS_cce17/env_cpl_mnh551_ww3_croco_oa5.sh
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #   Define prog.conf file
