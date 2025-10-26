@@ -19,9 +19,9 @@
 ############################################
  $STRINGS
 FSENDANA FRECVANA 1 7200 1 rst.nc EXPOUT
-40 40 40 40 wavt atmt
+nlat_model1 nlon_model1 nlat_model2 nlon_model2 id_model1 id_model2
 R  0  R  0
 SCRIPR
-DISTWGT LR SCALAR LATLON 1 4
+BILINEAR LR SCALAR LATLON 1 4
  $END
 

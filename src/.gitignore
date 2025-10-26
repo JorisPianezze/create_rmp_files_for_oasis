@@ -1,6 +1,5 @@
 *.o
 *.mod
 *.err
-create_rmp*
 model1
 model2
