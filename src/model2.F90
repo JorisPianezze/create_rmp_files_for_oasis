@@ -239,16 +239,16 @@ IF (mype == 0) THEN
   gg_error=-10000
   mask_error=1
   WHERE (gg_mask == 1)     ! masked points
-  	field_recv=10000.
-        mask_error=0
+     field_recv=10000.
+     mask_error=0
   ELSEWHERE                     ! non-masked points
-	WHERE (field_recv /= 0.)   ! non-masked points that received an interpolated value
-	   gg_error = ABS(((field_ana - field_recv)/field_recv))*100
-        ELSEWHERE   ! non-masked points that did not receive an interpolated value
-	   gg_error=-1.e20
+      WHERE (field_recv /= 0.)   ! non-masked points that received an interpolated value
+           gg_error = ABS(((field_ana - field_recv)/field_recv))*100
+      ELSEWHERE   ! non-masked points that did not receive an interpolated value
+           gg_error=-1.e20
            field_recv=1.e20
            mask_error=0
-        END WHERE
+      END WHERE
   END WHERE   
   
   IF (FILE_Debug >= 2) THEN

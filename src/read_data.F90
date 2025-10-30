@@ -27,7 +27,7 @@ INTEGER,           INTENT(IN   ) :: FILE_Debug
 INTEGER,           INTENT(  OUT) :: nlon, nlat
   
 INTEGER          :: file_id, nlon_id, nlat_id
-CHARACTER(len=8) :: cl_nam
+CHARACTER(len=9) :: cl_nam
   
 ! ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 !   Open netcdf file
@@ -37,9 +37,9 @@ CALL handle_netcdf_errors( NF90_OPEN(data_filename, NF90_NOWRITE, file_id), __LI
 ! ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 !   Read grid dim id.
 ! ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-cl_nam="x_"//cl_grd
+cl_nam=cl_grd//".nlon"
 CALL handle_netcdf_errors( NF90_INQ_DIMID(file_id, cl_nam, nlon_id), __LINE__, __FILE__ )
-cl_nam="y_"//cl_grd
+cl_nam=cl_grd//".nlat"
 CALL handle_netcdf_errors( NF90_INQ_DIMID(file_id, cl_nam, nlat_id), __LINE__, __FILE__ )
 
 ! ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

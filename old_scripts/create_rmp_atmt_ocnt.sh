@@ -11,7 +11,7 @@ nnode=2
 mpiprocs=1
 threads=1 
 
-## - Source & target grids and remapping (corresponding to files and namcouple in data_oasis3)
+## - Source & target grids and remapping
 SRC_GRID=atmt 
 TGT_GRID=ocnt
 remap=bilinear
