@@ -1,5 +1,7 @@
 # Create rmp files for OASIS
 
+This repository contains a tool for generating remapping files offline for the coupled simulations using OASIS coupler. Documentation can be found [here](https://jorispianezze.github.io/documentations/documentation_mesonh_ww3_croco_coupling/index.html).
+
 ## Compile the code
 
 ```bash
