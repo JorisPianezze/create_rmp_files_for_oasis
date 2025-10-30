@@ -24,3 +24,7 @@ python create_grids_and_masks.py
 With:
 - <src_grid>=atmt, wavt or ocnt
 - <tgt_grid>=atmt, wavt or ocnt
+
+## License
+
+This project is licensed under the [CeCILL-B](LICENSE) license, a French open-source license similar to BSD/MIT.
