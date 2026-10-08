@@ -20,9 +20,9 @@ import os, sys, shutil
 # ###           To be defined by user                   ###
 # #########################################################
 
-cfg_dir_config = '../../config_TUTORIAL/'
+cfg_dir_config = 'path_to_your_config'
 
-cfg_use_MNH   = True  ; cfg_file_MNH   = cfg_dir_config + '1_input_MNH/PGD_BENGUELA_10km.nc'
+cfg_use_MNH   = True  ; cfg_file_MNH   = cfg_dir_config + '1_input_MNH/PGD.nc'
 cfg_use_CROCO = True  ; cfg_file_CROCO = cfg_dir_config + '2_input_CROCO/croco_grd.nc'
 cfg_use_WW3   = False ; cfg_file_WW3   = cfg_dir_config + 'A2_frc_WW3_spinup/ww3.20220914.nc'
 
